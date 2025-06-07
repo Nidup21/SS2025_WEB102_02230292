@@ -8,7 +8,7 @@ const http = require("http");
 // Consider this as a database for now
 const students = [
     { id: 1, name: "Karma", age: 22 },
-    { id: 2, name: "Sonam", age: 26 }  
+    { id: 2, name: "Sangay", age: 26 }  
 ];
 
 // Create an HTTP server

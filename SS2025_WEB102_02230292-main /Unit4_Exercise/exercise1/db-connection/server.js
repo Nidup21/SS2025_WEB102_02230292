@@ -10,7 +10,7 @@ app.use(express.json());
 
 // Create PostgreSQL connection pool - ADJUST YOUR CREDENTIALS AS NEEDED
 const pool = new Pool({
-    user: 'sonamzangmo',    // Default PostgreSQL user (adjust if different)
+    user: 'postgres',    // Default PostgreSQL user (adjust if different)
     host: 'localhost',
     database: 'student_records',
     password: '',    // Add your password if you've set one (required on Windows)

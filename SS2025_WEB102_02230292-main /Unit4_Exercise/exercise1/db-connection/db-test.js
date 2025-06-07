@@ -2,7 +2,7 @@ const { Pool } = require('pg');
 
 // Create a connection pool - ADJUST YOUR CREDENTIALS AS NEEDED
 const pool = new Pool({
-    user: 'sonamzangmo',    // Default PostgreSQL user (adjust if different)
+    user: 'm3',    // Default PostgreSQL user (adjust if different)
     host: 'localhost',
     database: 'student_records',
     password: '',    // Add your password if you've set one
