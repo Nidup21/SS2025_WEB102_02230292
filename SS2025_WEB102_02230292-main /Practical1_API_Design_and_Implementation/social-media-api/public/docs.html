@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media API Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1, h2, h3 {
+            color: #0066cc;
+        }
+
+        .endpoint {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        .method {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .get {
+            background-color: #61affe;
+        }
+
+        .post {
+            background-color: #49cc90;
+        }
+
+        .put {
+            background-color: #fca130;
+        }
+
+        .delete {
+            background-color: #f93e3e;
+        }
+
+        .url {
+            margin-left: 10px;
+            font-family: monospace;
+            font-size: 1.1em;
+        }
+
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Social Media API Documentation</h1>
+    <p>This is the documentation for the Social Media API, a RESTful API for a platform.</p>
+
+    <!-- Users Section -->
+    <h2>Users</h2>
+
+    <!-- GET /api/users -->
+    <div class="endpoint">
+        <span class="method get">GET</span>
+        <span class="url">/api/users</span>
+        <p>Get a list of all users with pagination.</p>
+        <h3>Query Parameters</h3>
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Type</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>page</td>
+                <td>Number</td>
+                <td>Page number (default: 1)</td>
+            </tr>
+            <tr>
+                <td>limit</td>
+                <td>Number</td>
+                <td>Number of users per page (default: 10)</td>
+            </tr>
+        </table>
+        <h3>Response</h3>
+        <pre>
+{
+    "success": true,
+    "count": 2,
+    "page": 1,
+    "total_pages": 2,
+    "pagination": {
+        "next": {
+            "page": 2,
+            "limit": 10
+        }
+    },
+    "data": [
+        {
+            "id": "1",
+            "username": "traveler",
+            "full_name": "Karma",
+            "profile_picture": "https://example.com/profiles/traveler.jpg",
+            "bio": "Travel photographer",
+            "created_at": "2023-01-15"
+        },
+        ...
+    ]
+}
+        </pre>
+    </div>
+
+    <!-- GET /api/users/:id -->
+    <div class="endpoint">
+        <span class="method get">GET</span>
+        <span class="url">/api/users/:id</span>
+        <p>Get a specific user by ID.</p>
+        <h3>Parameters</h3>
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Type</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>String</td>
+                <td>User ID</td>
+            </tr>
+        </table>
+        <h3>Response</h3>
+        <pre>
+{
+    "success": true,
+    "data": {
+        "id": "1",
+        "username": "traveler",
+        "full_name": "Karma",
+        "profile_picture": "https://example.com/profiles/traveler.jpg",
+        "bio": "Travel photographer",
+        "created_at": "2023-01-15"
+    }
+}
+        </pre>
+    </div>
+
+    <!-- POST /api/users -->
+    <div class="endpoint">
+        <span class="method post">POST</span>
+        <span class="url">/api/users</span>
+        <p>Create a new user.</p>
+        <h3>Request Body</h3>
+        <pre>
+{
+    "username": "new_traveler",
+    "email": "new@example.com",
+    "password": "securepassword",
+    "full_name": "New Traveler",
+    "bio": "Adventure seeker"
+}
+        </pre>
+        <h3>Response</h3>
+        <pre>
+{
+    "success": true,
+    "data": {
+        "id": "4",
+        "username": "new_traveler",
+        "full_name": "New Traveler",
+        "email": "new@example.com",
+        "profile_picture": "default-profile.jpg",
+        "bio": "Adventure seeker",
+        "created_at": "2023-03-20"
+    }
+}
+        </pre>
+    </div>
+
+    <!-- PUT /api/users/:id -->
+    <div class="endpoint">
+        <span class="method put">PUT</span>
+        <span class="url">/api/users/:id</span>
+        <p>Update an existing user.</p>
+        <h3>Parameters</h3>
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Type</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>String</td>
+                <td>User ID</td>
+            </tr>
+        </table>
+        <h3>Request Body</h3>
+        <pre>
+{
+    "username": "updated_traveler",
+    "full_name": "Updated Traveler",
+    "bio": "Updated bio"
+}
+        </pre>
+        <h3>Response</h3>
+        <pre>
+{
+    "success": true,
+    "data": {
+        "id": "1",
+        "username": "updated_traveler",
+        "full_name": "Updated Traveler",
+        "profile_picture": "https://example.com/profiles/traveler.jpg",
+        "bio": "Updated bio",
+        "created_at": "2023-01-15"
+    }
+}
+        </pre>
+    </div>
+
+    <!-- DELETE /api/users/:id -->
+    <div class="endpoint">
+        <span class="method delete">DELETE</span>
+        <span class="url">/api/users/:id</span>
+        <p>Delete a user by ID.</p>
+        <h3>Parameters</h3>
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Type</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>String</td>
+                <td>User ID</td>
+            </tr>
+        </table>
+        <h3>Response</h3>
+        <pre>
+{
+    "success": true,
+    "data": {}
+}
+        </pre>
+    </div>
+
+    <!-- Posts Section -->
+    <h2>Posts</h2>
+
+    <!-- PUT /api/posts/:id -->
+    <div class="endpoint">
+        <span class="method put">PUT</span>
+        <span class="url">/api/posts/:id</span>
+        <p>Update an existing post.</p>
+        <h3>Parameters</h3>
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Type</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>String</td>
+                <td>Post ID</td>
+            </tr>
+        </table>
+        <h3>Request Body</h3>
+        <pre>
+{
+    "caption": "Updated caption",
+    "image": "https://example.com/updated-image.jpg"
+}
+        </pre>
+        <h3>Response</h3>
+        <pre>
+{
+    "success": true,
+    "data": {
+        "id": "1",
+        "caption": "Updated caption",
+        "image": "https://example.com/updated-image.jpg",
+        "user_id": "1",
+        "created_at": "2023-01-15"
+    }
+}
+        </pre>
+    </div>
+
+    <!-- DELETE /api/posts/:id -->
+    <div class="endpoint">
+        <span class="method delete">DELETE</span>
+        <span class="url">/api/posts/:id</span>
+        <p>Delete a post by ID.</p>
+        <h3>Parameters</h3>
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Type</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>String</td>
+                <td>Post ID</td>
+            </tr>
+        </table>
+        <h3>Response</h3>
+        <pre>
+{
+    "success": true,
+    "data": {}
+}
+        </pre>
+    </div>
+
+    <!-- Comments Section -->
+    <h2>Comments</h2>
+
+    <!-- PUT /api/comments/:id -->
+    <div class="endpoint">
+        <span class="method put">PUT</span>
+        <span class="url">/api/comments/:id</span>
+        <p>Update an existing comment.</p>
+        <h3>Parameters</h3>
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Type</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>String</td>
+                <td>Comment ID</td>
+            </tr>
+        </table>
+        <h3>Request Body</h3>
+        <pre>
+{
+    "text": "Updated comment text"
+}
+        </pre>
+        <h3>Response</h3>
+        <pre>
+{
+    "success": true,
+    "data": {
+        "id": "1",
+        "text": "Updated comment text",
+        "user_id": "1",
+        "post_id": "1",
+        "created_at": "2023-01-15"
+    }
+}
+        </pre>
+    </div>
+
+    <!-- DELETE /api/comments/:id -->
+    <div class="endpoint">
+        <span class="method delete">DELETE</span>
+        <span class="url">/api/comments/:id</span>
+        <p>Delete a comment by ID.</p>
+        <h3>Parameters</h3>
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Type</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>String</td>
+                <td>Comment ID</td>
+            </tr>
+        </table>
+        <h3>Response</h3>
+        <pre>
+{
+    "success": true,
+    "data": {}
+}
+        </pre>
+    </div>
+
+    <!-- Likes Section -->
+    <h2>Likes</h2>
+
+    <!-- DELETE /api/likes/:id -->
+    <div class="endpoint">
+        <span class="method delete">DELETE</span>
+        <span class="url">/api/likes/:id</span>
+        <p>Delete a like by ID.</p>
+        <h3>Parameters</h3>
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Type</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>String</td>
+                <td>Like ID</td>
+            </tr>
+        </table>
+        <h3>Response</h3>
+        <pre>
+{
+    "success": true,
+    "data": {}
+}
+        </pre>
+    </div>
+
+    <!-- Followers Section -->
+    <h2>Followers</h2>
+
+    <!-- DELETE /api/followers/:id -->
+    <div class="endpoint">
+        <span class="method delete">DELETE</span>
+        <span class="url">/api/followers/:id</span>
+        <p>Delete a follower by ID.</p>
+        <h3>Parameters</h3>
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Type</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>String</td>
+                <td>Follower ID</td>
+            </tr>
+        </table>
+        <h3>Response</h3>
+        <pre>
+{
+    "success": true,
+    "data": {}
+}
+        </pre>
+    </div>
+
+</body>
+</html>
